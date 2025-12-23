@@ -40,7 +40,19 @@ public class LoginController {
             
             showAlert(Alert.AlertType.INFORMATION, "Sukses", "Login Berhasil! Halo, " + hasil.getUsername());
             
-            
+            try {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("dashboard.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) txtUsername.getScene().getWindow();
+
+                stage.setScene(new Scene(root));
+                stage.setTitle("P.I.G - Dashboard");
+                stage.centerOnScreen();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Error", "Gagal Memuat Halaman Dashboard");
+            }
             
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Username atau Password salah!");
