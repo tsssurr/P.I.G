@@ -17,14 +17,12 @@ public class Pengguna {
         this.idGudang = idGudang;
     }
 
-    //Getters
     public int getIdPengguna(){ return idPengguna; }
     public String getUsername(){ return username; }
     public String getPassword(){ return password; }
     public String getRole(){ return role; }
     public int getIdGudang(){ return idGudang; }
     
-    //Setters
     public void setIdPengguna(int id){ this.idPengguna = id; }
     public void setUsername(String user){ this.username = user; }
     public void setPassword(String pass){ this.password = pass; }
