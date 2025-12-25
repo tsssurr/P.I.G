@@ -46,8 +46,14 @@ public class DashboardController {
     @FXML
     private void menuBarang(){
         System.out.println("Buka Menu Barang");
-        // TODO : Pindah ke Screen Barang Nanti
-        // yang penting ada many to many
+        try{
+            Stage stage = (Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("barang.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Manajemen Barang");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
