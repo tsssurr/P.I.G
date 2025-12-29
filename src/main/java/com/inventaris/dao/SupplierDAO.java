@@ -6,8 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//CRUD SUPPLIER
 public class SupplierDAO {
 
+    // READ
     public List<Supplier> getAllSupplier() {
         List<Supplier> list = new ArrayList<>();
         String sql = "SELECT * FROM supplier";
@@ -28,6 +30,7 @@ public class SupplierDAO {
         return list;
     }
 
+    // CREATE
     public boolean tambahSupplier(String nama, String alamat, String kontak) {
         String sql = "INSERT INTO supplier (nama_supplier, alamat, kontak) VALUES (?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -43,6 +46,7 @@ public class SupplierDAO {
         }
     }
 
+    // UPDATE
     public boolean updateSupplier(int id, String nama, String alamat, String kontak) {
         String sql = "UPDATE supplier SET nama_supplier=?, alamat=?, kontak=? WHERE id_supplier=?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -59,6 +63,7 @@ public class SupplierDAO {
         }
     }
 
+    // DELETE
     public boolean hapusSupplier(int id) {
         String sql = "DELETE FROM supplier WHERE id_supplier=?";
         try (Connection conn = DatabaseConnection.getConnection();
