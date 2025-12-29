@@ -56,13 +56,27 @@ public class DashboardController {
     }
 
     @FXML
-    private void menuGudang(){
-        System.out.println("Buka Menu Gudang");
+    private void menuGudang() {
+        try {
+            Stage stage = (Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("gudang.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Manajemen Gudang");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void menuPengguna(){
-        System.out.println("Buka Menu Pengguna");
+    private void menuPengguna() {
+        try {
+            Stage stage = (Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("pengguna.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Manajemen Pengguna");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

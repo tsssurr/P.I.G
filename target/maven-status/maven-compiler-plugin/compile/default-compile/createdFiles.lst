@@ -1,8 +1,12 @@
 com\inventaris\controller\LoginController.class
 com\inventaris\controller\DashboardController.class
-module-info.class
+com\inventaris\dao\GudangDAO.class
 com\inventaris\App.class
-com\inventaris\model\Pengguna.class
 com\inventaris\dao\PenggunaDAO.class
 com\inventaris\util\Session.class
+com\inventaris\controller\GudangController.class
+module-info.class
+com\inventaris\model\Pengguna.class
+com\inventaris\controller\PenggunaController.class
+com\inventaris\model\Gudang.class
 com\inventaris\DatabaseConnection.class
