@@ -1,6 +1,6 @@
 package com.inventaris.model;
 
-public class Barang {
+public class Barang{
     private int idBarang;
     private String kodeBarang;
     private String namaBarang;

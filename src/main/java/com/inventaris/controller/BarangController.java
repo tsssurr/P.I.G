@@ -17,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class BarangController {
+public class BarangController{
 
     @FXML private TableView<Barang> tableBarang;
     @FXML private TableColumn<Barang, String> colKode;
@@ -28,8 +28,8 @@ public class BarangController {
     @FXML private TextField txtNama;
     @FXML private TextField txtKategori;
 
-    private boolean isInputValid() {
-        if (txtKode.getText().isEmpty() || txtNama.getText().isEmpty() || txtKategori.getText().isEmpty()) {
+    private boolean isInputValid(){
+        if(txtKode.getText().isEmpty() || txtNama.getText().isEmpty() || txtKategori.getText().isEmpty()){
             showAlert("Validasi", "Semua kolom harus diisi!");
             return false;
         }
@@ -50,7 +50,7 @@ public class BarangController {
         return result.isPresent() && result.get() == yesButton;
     }
 
-    private void showAlert(String title, String content) {
+    private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -63,7 +63,7 @@ public class BarangController {
     private Barang selectedBarang = null; 
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         
         colKode.setCellValueFactory(new PropertyValueFactory<>("kodeBarang"));
         colNama.setCellValueFactory(new PropertyValueFactory<>("namaBarang"));
@@ -71,8 +71,8 @@ public class BarangController {
 
         loadData();
 
-        tableBarang.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+        tableBarang.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+            if(newSelection != null){
                 selectedBarang = newSelection;
                 txtKode.setText(newSelection.getKodeBarang());
                 txtNama.setText(newSelection.getNamaBarang());
@@ -81,7 +81,7 @@ public class BarangController {
         });
     }
 
-    private void loadData() {
+    private void loadData(){
         barangList.clear();
         List<Barang> data = barangDAO.getAllBarang();
         barangList.addAll(data);
@@ -89,15 +89,15 @@ public class BarangController {
     }
 
     @FXML
-    private void handleSave() {
-        if(isInputValid()) {
+    private void handleSave(){
+        if(isInputValid()){
             if(showConfirmation("Konfirmasi Simpan", "Apakah Anda yakin ingin menambahkan barang?")){
                 boolean sukses = barangDAO.tambahBarang(txtKode.getText(), txtNama.getText(), txtKategori.getText());
-                if(sukses) {
+                if(sukses){
                     showAlert("Sukses", "Barang berhasil ditambahkan");
                     handleClear();
                     loadData();
-                } else {
+                }else{
                     showAlert("Gagal", "Gagal menambahkan barang");
                 }
             }
@@ -105,11 +105,11 @@ public class BarangController {
     }
 
     @FXML
-    private void handleUpdate() {
-        if(selectedBarang != null && isInputValid()) {
+    private void handleUpdate(){
+        if(selectedBarang != null && isInputValid()){
             if(showConfirmation("Konfirmasi Perubahan", "Apakah Anda yakin ingin mengubah informasi barang?")){
                 boolean sukses = barangDAO.updateBarang(selectedBarang.getIdBarang(), txtKode.getText(), txtNama.getText(), txtKategori.getText());
-                if(sukses) {
+                if(sukses){
                     showAlert("Sukses", "Informasi barang berhasil diubah");
                     handleClear();
                     loadData();
@@ -121,23 +121,23 @@ public class BarangController {
     }
 
     @FXML
-    private void handleDelete() {
-        if (selectedBarang != null) {
+    private void handleDelete(){
+        if(selectedBarang != null){
             if(showConfirmation("Konfirmasi Penghapusan", "Apakah Anda yakin ingin menghapus barang?")){
                 boolean sukses = barangDAO.hapusBarang(selectedBarang.getIdBarang());
-                if (sukses) {
+                if(sukses){
                     showAlert("Sukses", "Barang berhasil dihapus");
                     handleClear();
                     loadData();
                 }
             }
-        } else {
+        }else{
             showAlert("Peringatan", "Pilih barang pada tabel terlebih dahulu");
         }
     }
 
     @FXML
-    private void handleClear() {
+    private void handleClear(){
         txtKode.clear();
         txtNama.clear();
         txtKategori.clear();
@@ -146,8 +146,8 @@ public class BarangController {
     }
 
     @FXML
-    private void handleBack() throws IOException {
-        Stage stage = (Stage) tableBarang.getScene().getWindow();
+    private void handleBack() throws IOException{
+        Stage stage =(Stage) tableBarang.getScene().getWindow();
         Parent root = FXMLLoader.load(App.class.getResource("dashboard.fxml"));
         stage.setScene(new Scene(root));
     }

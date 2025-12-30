@@ -14,7 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController{
     @FXML
     private TextField txtUsername;
 
@@ -24,42 +24,42 @@ public class LoginController {
     private PenggunaDAO penggunaDAO = new PenggunaDAO();
 
     @FXML
-    private void handleLogin() {
+    private void handleLogin(){
         String user = txtUsername.getText();
         String pass = txtPassword.getText();
 
-        if (user.isEmpty() || pass.isEmpty()) {
+        if(user.isEmpty() || pass.isEmpty()){
             showAlert(Alert.AlertType.WARNING, "Peringatan", "Username dan Password tidak boleh kosong!");
             return;
         }
 
         Pengguna hasil = penggunaDAO.login(user, pass);
 
-        if (hasil != null) {
+        if(hasil != null){
             Session.setCurrentUser(hasil);
             
             showAlert(Alert.AlertType.INFORMATION, "Sukses", "Login Berhasil! Halo, " + hasil.getUsername());
             
-            try {
+            try{
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("dashboard.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) txtUsername.getScene().getWindow();
+                Stage stage =(Stage) txtUsername.getScene().getWindow();
 
                 stage.setScene(new Scene(root));
                 stage.setTitle("P.I.G - Dashboard");
                 stage.centerOnScreen();
-            } catch (IOException e) {
+            }catch(IOException e){
                 e.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Error", "Gagal Memuat Halaman Dashboard");
             }
             
-        } else {
+        }else{
             showAlert(Alert.AlertType.ERROR, "Error", "Username atau Password salah!");
         }
     }
 
-    private void showAlert(Alert.AlertType type, String title, String content) {
+    private void showAlert(Alert.AlertType type, String title, String content){
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);

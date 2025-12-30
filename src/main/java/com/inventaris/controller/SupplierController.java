@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class SupplierController {
+public class SupplierController{
 
     @FXML private TableView<Supplier> tableSupplier;
     @FXML private TableColumn<Supplier, String> colNama;
@@ -26,8 +26,8 @@ public class SupplierController {
     @FXML private TextArea txtAlamat;
     @FXML private TextField txtKontak;
     
-    private boolean isInputValid() {
-        if (txtNama.getText().isEmpty() || txtAlamat.getText().isEmpty()) {
+    private boolean isInputValid(){
+        if(txtNama.getText().isEmpty() || txtAlamat.getText().isEmpty()){
             showAlert("Validasi", "Nama dan Alamat wajib diisi!");
             return false;
         }
@@ -48,7 +48,7 @@ public class SupplierController {
         return result.isPresent() && result.get() == yesButton;
     }
 
-    private void showAlert(String title, String content) {
+    private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -61,15 +61,15 @@ public class SupplierController {
     private Supplier selectedSupplier = null;
     
     @FXML
-    public void initialize() {
+    public void initialize(){
         colNama.setCellValueFactory(new PropertyValueFactory<>("namaSupplier"));
         colAlamat.setCellValueFactory(new PropertyValueFactory<>("alamat"));
         colKontak.setCellValueFactory(new PropertyValueFactory<>("kontak"));
 
         loadData();
 
-        tableSupplier.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+        tableSupplier.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+            if(newSelection != null){
                 selectedSupplier = newSelection;
 
                 txtNama.setText(newSelection.getNamaSupplier());
@@ -79,17 +79,17 @@ public class SupplierController {
         });
     }
 
-    private void loadData() {
+    private void loadData(){
         supplierList.clear();
         supplierList.addAll(supplierDAO.getAllSupplier());
         tableSupplier.setItems(supplierList);
     }
 
     @FXML
-    private void handleSave() {
-        if (isInputValid()) {
-            if (showConfirmation("Konfirmasi Simpan", "Apakah Anda yakin menambahkan supplier baru?")) {
-                if (supplierDAO.tambahSupplier(txtNama.getText(), txtAlamat.getText(), txtKontak.getText())) {
+    private void handleSave(){
+        if(isInputValid()){
+            if(showConfirmation("Konfirmasi Simpan", "Apakah Anda yakin menambahkan supplier baru?")){
+                if(supplierDAO.tambahSupplier(txtNama.getText(), txtAlamat.getText(), txtKontak.getText())){
                     showAlert("Sukses", "Supplier berhasil disimpan");
                     handleClear();
                     loadData();
@@ -99,38 +99,38 @@ public class SupplierController {
     }
 
     @FXML
-    private void handleUpdate() {
-        if (selectedSupplier != null && isInputValid()) {
-            if (showConfirmation("Konfirmasi Update", "Apakah Anda yakin mengubah data supplier ini?")) {
-                if (supplierDAO.updateSupplier(selectedSupplier.getIdSupplier(), txtNama.getText(), txtAlamat.getText(), txtKontak.getText())) {
+    private void handleUpdate(){
+        if(selectedSupplier != null && isInputValid()){
+            if(showConfirmation("Konfirmasi Update", "Apakah Anda yakin mengubah data supplier ini?")){
+                if(supplierDAO.updateSupplier(selectedSupplier.getIdSupplier(), txtNama.getText(), txtAlamat.getText(), txtKontak.getText())){
                     showAlert("Sukses", "Data supplier berhasil diubah");
                     handleClear();
                     loadData();
                 }
             }
-        } else {
+        }else{
             showAlert("Peringatan", "Pilih supplier pada tabel terlebih dahulu");
         }
     }
 
     @FXML
-    private void handleDelete() {
-        if (selectedSupplier != null) {
+    private void handleDelete(){
+        if(selectedSupplier != null){
             String nama = selectedSupplier.getNamaSupplier();
-            if (showConfirmation("Konfirmasi Hapus", "Apakah anda yakin menghapus supplier \"" + nama + "\"?")) {
-                if (supplierDAO.hapusSupplier(selectedSupplier.getIdSupplier())) {
+            if(showConfirmation("Konfirmasi Hapus", "Apakah anda yakin menghapus supplier \"" + nama + "\"?")){
+                if(supplierDAO.hapusSupplier(selectedSupplier.getIdSupplier())){
                     showAlert("Sukses", "Supplier berhasil dihapus");
                     handleClear();
                     loadData();
                 }
             }
-        } else {
+        }else{
             showAlert("Peringatan", "Pilih supplier pada tabel terlebih dahulu");
         }
     }
 
     @FXML
-    private void handleClear() {
+    private void handleClear(){
         txtNama.clear();
         txtAlamat.clear();
         txtKontak.clear();
@@ -139,8 +139,8 @@ public class SupplierController {
     }
 
     @FXML
-    private void handleBack() throws IOException {
-        Stage stage = (Stage) tableSupplier.getScene().getWindow();
+    private void handleBack() throws IOException{
+        Stage stage =(Stage) tableSupplier.getScene().getWindow();
         Parent root = FXMLLoader.load(App.class.getResource("dashboard.fxml"));
         stage.setScene(new Scene(root));
     }

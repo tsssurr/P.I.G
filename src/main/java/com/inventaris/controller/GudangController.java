@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class GudangController {
+public class GudangController{
 
     @FXML private TableView<Gudang> tableGudang;
     @FXML private TableColumn<Gudang, String> colNama;
@@ -24,15 +24,15 @@ public class GudangController {
     @FXML private TextField txtNama;
     @FXML private TextArea txtLokasi;
 
-    private boolean isInputValid() {
-        if (txtNama.getText().isEmpty()) {
+    private boolean isInputValid(){
+        if(txtNama.getText().isEmpty()){
             showAlert("Validasi", "Nama Gudang wajib diisi!");
             return false;
         }
         return true;
     }
 
-    private void showAlert(String title, String content) {
+    private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -40,7 +40,7 @@ public class GudangController {
         alert.showAndWait();
     }
 
-    private boolean showConfirmation(String title, String content) {
+    private boolean showConfirmation(String title, String content){
         ButtonType yesButton = new ButtonType("Ya"); 
         ButtonType noButton = new ButtonType("Tidak");
 
@@ -59,15 +59,15 @@ public class GudangController {
     private Gudang selectedGudang = null;
 
     @FXML
-    public void initialize() {
+    public void initialize(){
 
         colNama.setCellValueFactory(new PropertyValueFactory<>("namaGudang"));
         colLokasi.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
 
         loadData();
 
-        tableGudang.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
+        tableGudang.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) ->{
+            if(newVal != null){
                 selectedGudang = newVal;
                 txtNama.setText(newVal.getNamaGudang());
                 txtLokasi.setText(newVal.getLokasi());
@@ -75,17 +75,17 @@ public class GudangController {
         });
     }
 
-    private void loadData() {
+    private void loadData(){
         gudangList.clear();
         gudangList.addAll(gudangDAO.getAllGudang());
         tableGudang.setItems(gudangList);
     }
 
     @FXML
-    private void handleSave() {
-        if (isInputValid()) {
-            if (showConfirmation("Konfirmasi Simpan", "Simpan data gudang baru?")) {
-                if (gudangDAO.tambahGudang(txtNama.getText(), txtLokasi.getText())) {
+    private void handleSave(){
+        if(isInputValid()){
+            if(showConfirmation("Konfirmasi Simpan", "Simpan data gudang baru?")){
+                if(gudangDAO.tambahGudang(txtNama.getText(), txtLokasi.getText())){
                     showAlert("Sukses", "Gudang berhasil disimpan");
                     handleClear();
                     loadData();
@@ -95,38 +95,38 @@ public class GudangController {
     }
 
     @FXML
-    private void handleUpdate() {
-        if (selectedGudang != null && isInputValid()) {
-            if (showConfirmation("Konfirmasi Update", "Ubah data gudang ini?")) {
-                if (gudangDAO.updateGudang(selectedGudang.getIdGudang(), txtNama.getText(), txtLokasi.getText())) {
+    private void handleUpdate(){
+        if(selectedGudang != null && isInputValid()){
+            if(showConfirmation("Konfirmasi Update", "Ubah data gudang ini?")){
+                if(gudangDAO.updateGudang(selectedGudang.getIdGudang(), txtNama.getText(), txtLokasi.getText())){
                     showAlert("Sukses", "Gudang berhasil diupdate");
                     handleClear();
                     loadData();
                 }
             }
-        } else {
+        }else{
             showAlert("Peringatan", "Pilih gudang dulu!");
         }
     }
 
     @FXML
-    private void handleDelete() {
-        if (selectedGudang != null) {
+    private void handleDelete(){
+        if(selectedGudang != null){
             String nama = selectedGudang.getNamaGudang();
-            if (showConfirmation("Konfirmasi Hapus", "Yakin hapus gudang \"" + nama + "\"?\nPERHATIAN: Data stok di gudang ini mungkin akan hilang.")) {
-                if (gudangDAO.hapusGudang(selectedGudang.getIdGudang())) {
+            if(showConfirmation("Konfirmasi Hapus", "Yakin hapus gudang \"" + nama + "\"?\nPERHATIAN: Data stok di gudang ini mungkin akan hilang.")){
+                if(gudangDAO.hapusGudang(selectedGudang.getIdGudang())){
                     showAlert("Sukses", "Gudang berhasil dihapus");
                     handleClear();
                     loadData();
                 }
             }
-        } else {
+        }else{
             showAlert("Peringatan", "Pilih gudang dulu!");
         }
     }
 
     @FXML
-    private void handleClear() {
+    private void handleClear(){
         txtNama.clear();
         txtLokasi.clear();
         selectedGudang = null;
@@ -134,8 +134,8 @@ public class GudangController {
     }
 
     @FXML
-    private void handleBack() throws IOException {
-        Stage stage = (Stage) tableGudang.getScene().getWindow();
+    private void handleBack() throws IOException{
+        Stage stage =(Stage) tableGudang.getScene().getWindow();
         Parent root = FXMLLoader.load(App.class.getResource("dashboard.fxml"));
         stage.setScene(new Scene(root));
     }
