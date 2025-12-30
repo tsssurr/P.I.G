@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\controller\LoginController.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\util\Session.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\App.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\controller\DashboardController.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\controller\PenggunaController.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\dao\GudangDAO.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\dao\PenggunaDAO.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\module-info.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\controller\GudangController.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\model\Pengguna.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\DatabaseConnection.java
+C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nad\P.I.G\src\main\java\com\inventaris\model\Gudang.java
+=======
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\App.java
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\controller\DashboardController.java
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\controller\BarangController.java
@@ -12,3 +26,4 @@ C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pen
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\controller\LoginController.java
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\controller\SupplierController.java
 C:\Users\Surya\Documents\kuliah\SMT 3\Pemrograman Beroirentasi Objek\Project Pengelolaan Inventaris Gudang\project\nyaw\P.I.G\src\main\java\com\inventaris\model\Barang.java
+>>>>>>> 1dc58fa8653475ca701ed572a7fef80313f8a236
