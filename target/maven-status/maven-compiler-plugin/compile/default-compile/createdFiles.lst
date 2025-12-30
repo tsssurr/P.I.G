@@ -1,5 +1,6 @@
 com\inventaris\controller\LoginController.class
 com\inventaris\controller\DashboardController.class
+<<<<<<< HEAD
 com\inventaris\dao\GudangDAO.class
 com\inventaris\App.class
 com\inventaris\dao\PenggunaDAO.class
@@ -9,4 +10,17 @@ module-info.class
 com\inventaris\model\Pengguna.class
 com\inventaris\controller\PenggunaController.class
 com\inventaris\model\Gudang.class
+=======
+com\inventaris\App.class
+com\inventaris\model\Supplier.class
+com\inventaris\dao\BarangDAO.class
+com\inventaris\dao\PenggunaDAO.class
+com\inventaris\util\Session.class
+com\inventaris\dao\SupplierDAO.class
+com\inventaris\model\Barang.class
+module-info.class
+com\inventaris\controller\BarangController.class
+com\inventaris\controller\SupplierController.class
+com\inventaris\model\Pengguna.class
+>>>>>>> 1dc58fa8653475ca701ed572a7fef80313f8a236
 com\inventaris\DatabaseConnection.class
