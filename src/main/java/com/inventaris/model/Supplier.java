@@ -35,5 +35,10 @@ public class Supplier{
     public void setKontak(String kon){
         this.kontak = kon;
     }
+
+    @Override
+    public String toString(){
+        return namaSupplier;
+    }
 }
 

@@ -32,7 +32,12 @@ public class Barang{
     public void setNameBarang(String nama){
         this.namaBarang = nama;
     }
-    public void setKategore(String kategori){
+    public void setKategori(String kategori){
         this.kategori = kategori;
+    }
+
+    @Override
+    public String toString() {
+        return namaBarang + " (" + kodeBarang + ")";
     }
 }
