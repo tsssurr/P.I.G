@@ -104,6 +104,14 @@ public class DashboardController{
     @FXML
     private void menuBarangMasuk(){
         System.out.println("Buka Transaksi Masuk(Pengadaan)");
+        try {
+            Stage stage = (Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("transaksi_masuk.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Transaksi Barang Masuk");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
