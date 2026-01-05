@@ -35,4 +35,9 @@ public class Barang{
     public void setKategore(String kategori){
         this.kategori = kategori;
     }
+
+    @Override
+    public String toString(){
+        return namaBarang;
+    }
 }

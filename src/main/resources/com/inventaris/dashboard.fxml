@@ -32,8 +32,9 @@
    </VBox>
 
    <Label text="--- Transaksi ---" />
-   <Button text="Catat Barang Masuk" onAction="#menuBarangMasuk" maxWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
-   <Button text="Catat Barang Keluar" onAction="#menuBarangKeluar" maxWidth="200.0" style="-fx-background-color: #FF9800; -fx-text-fill: white;" />
+   <Button text="Catat Pengadaan" onAction="#menuBarangMasuk" maxWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+   <Button text="Catat Penjualan" onAction="#menuPenjualan" maxWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+   <Button text="Catat Retur" onAction="#menuRetur" maxWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
 
    <Separator prefWidth="200.0" />
    

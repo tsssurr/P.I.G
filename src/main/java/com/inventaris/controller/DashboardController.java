@@ -30,7 +30,7 @@ public class DashboardController{
         if("user".equalsIgnoreCase(role)){
             adminMenuContainer.setVisible(false);
             adminMenuContainer.setManaged(false);
-        } 
+        }
     }
 
     @FXML
@@ -64,7 +64,7 @@ public class DashboardController{
             Parent root = FXMLLoader.load(App.class.getResource("supplier.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Manajemen Supplier");
-        } catch(IOException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
@@ -77,7 +77,7 @@ public class DashboardController{
             Parent root = FXMLLoader.load(App.class.getResource("gudang.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Manajemen Gudang");
-        } catch(IOException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
@@ -90,16 +90,16 @@ public class DashboardController{
             Parent root = FXMLLoader.load(App.class.getResource("pengguna.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Manajemen Pengguna");
-        } catch(IOException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private void menuPembeli(){
-        System.out.println("Buka Menu Manajemen Pengguna");
-        //TODO: buat mvc pembeli cok, transaksi keluar kan ada beli sama retur
-    }
+    // @FXML
+    // private void menuPembeli(){
+    //     System.out.println("Buka Menu Manajemen Pengguna");
+    //     //TODO: buat mvc pembeli cok, transaksi keluar kan ada beli sama retur
+    // }
 
     @FXML
     private void menuBarangMasuk(){
@@ -109,5 +109,31 @@ public class DashboardController{
     @FXML
     private void menuBarangKeluar(){
         System.out.println("Buka Transaksi Keluar(Retur/Jual)");
+    }
+
+    @FXML
+    private void menuPenjualan(){
+        System.out.println("Buka Transaksi Keluar(Penjualan)");
+        try{
+            Stage stage =(Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("penjualan.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Menu Penjualan");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void menuRetur(){
+        System.out.println("Buka Transaksi Keluar(Retur)");
+        try{
+            Stage stage =(Stage) lblWelcome.getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource("retur.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Menu Retur");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
