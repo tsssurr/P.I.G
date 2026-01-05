@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventaris.controller.ReturController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+
+   <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+      <Label text="Riwayat Retur Barang">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableRetur" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="colTanggal" text="Tanggal" prefWidth="90.0" />
+          <TableColumn fx:id="colBarang" text="Barang" prefWidth="150.0" />
+          <TableColumn fx:id="colGudang" text="Gudang Asal" prefWidth="120.0" />
+          <TableColumn fx:id="colSupplier" text="Supplier Tujuan" prefWidth="150.0" />
+          <TableColumn fx:id="colJumlah" text="Jml" prefWidth="50.0" />
+          <TableColumn fx:id="colKeterangan" text="Keterangan" prefWidth="150.0" />
+        </columns>
+      </TableView>
+      <Button text="Kembali ke Dashboard" onAction="#handleBack" />
+   </VBox>
+
+   <VBox spacing="10.0" prefWidth="320.0" style="-fx-background-color: #fff3e0; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #ff9800; -fx-border-radius: 10;">
+      <Label text="Form Retur ke Supplier" textFill="#e65100">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      
+      <Label text="Tanggal Retur" />
+      <DatePicker fx:id="dateTanggal" maxWidth="Infinity" />
+      
+      <Label text="Pilih Barang" />
+      <ComboBox fx:id="comboBarang" maxWidth="Infinity" promptText="-- Pilih Barang --" />
+      
+      <Label text="Ambil dari Gudang" />
+      <ComboBox fx:id="comboGudang" maxWidth="Infinity" promptText="-- Pilih Gudang --" />
+      
+      <Label text="Supplier Tujuan" />
+      <ComboBox fx:id="comboSupplier" maxWidth="Infinity" promptText="-- Pilih Supplier --" />
+      
+      <Label text="Jumlah Barang" />
+      <TextField fx:id="txtJumlah" promptText="0" />
+      
+      <Label text="Alasan / Keterangan" />
+      <TextArea fx:id="txtKeterangan" prefHeight="60.0" promptText="Barang rusak, kadaluarsa, dll..." />
+      
+      <Button text="SIMPAN RETUR" onAction="#handleSave" maxWidth="Infinity" style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10;" />
+   </VBox>
+</HBox>

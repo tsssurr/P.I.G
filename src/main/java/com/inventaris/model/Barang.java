@@ -37,7 +37,7 @@ public class Barang{
     }
 
     @Override
-    public String toString() {
-        return namaBarang + " (" + kodeBarang + ")";
+    public String toString(){
+        return namaBarang;
     }
 }
