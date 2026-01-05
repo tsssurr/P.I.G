@@ -1,9 +1,11 @@
+com\inventaris\dao\TransaksiMasukDAO.class
 com\inventaris\model\TransaksiKeluar.class
 com\inventaris\controller\DashboardController.class
 com\inventaris\dao\PembeliDAO.class
 com\inventaris\App.class
 com\inventaris\controller\PenjualanController.class
 com\inventaris\model\Supplier.class
+com\inventaris\controller\TransaksiMasukController.class
 com\inventaris\dao\SupplierDAO.class
 com\inventaris\controller\ReturController.class
 com\inventaris\model\Barang.class
@@ -25,3 +27,4 @@ com\inventaris\dao\PenjualanDAO.class
 com\inventaris\controller\GudangController.class
 com\inventaris\dao\ReturDAO.class
 com\inventaris\controller\SupplierController.class
+com\inventaris\model\TransaksiMasuk.class
