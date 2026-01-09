@@ -8,20 +8,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventaris.controller.LoginController">
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventaris.controller.LoginController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
+   <VBox prefHeight="100.0" prefWidth="700.0" />
    
-   <Label text="Sistem Inventaris Gudang">
+   <Label text="Sistem Pengelokaan Inventaris Gudang">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
    </Label>
    
-   <TextField fx:id="txtUsername" promptText="Username" maxWidth="250.0" />
+   <TextField fx:id="txtUsername" maxWidth="250.0" promptText="Username" />
    
-   <PasswordField fx:id="txtPassword" promptText="Password" maxWidth="250.0" />
+   <PasswordField fx:id="txtPassword" maxWidth="250.0" promptText="Password" />
    
-   <Button text="LOGIN" onAction="#handleLogin" maxWidth="250.0" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" />
+   <Button maxWidth="250.0" onAction="#handleLogin" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" text="LOGIN" />
+   <VBox layoutX="30.0" layoutY="30.0" prefHeight="100.0" prefWidth="700.0" />
 </VBox>

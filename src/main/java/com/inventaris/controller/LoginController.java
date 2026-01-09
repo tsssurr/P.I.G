@@ -33,12 +33,12 @@ public class LoginController{
             return;
         }
 
-        Pengguna hasil = penggunaDAO.login(user, pass);
+        Pengguna pengguna = penggunaDAO.login(user, pass);
 
-        if(hasil != null){
-            Session.setCurrentUser(hasil);
+        if(pengguna != null){
+            Session.setCurrentUser(pengguna);
             
-            showAlert(Alert.AlertType.INFORMATION, "Sukses", "Login Berhasil! Halo, " + hasil.getUsername());
+            showAlert(Alert.AlertType.INFORMATION, "Sukses", "Login Berhasil! Halo, " + pengguna.getUsername());
             
             try{
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("dashboard.fxml"));
@@ -55,7 +55,7 @@ public class LoginController{
             }
             
         }else{
-            showAlert(Alert.AlertType.ERROR, "Error", "Username atau Password salah!");
+            showAlert(Alert.AlertType.ERROR, "Error", "Username atau Password salah");
         }
     }
 

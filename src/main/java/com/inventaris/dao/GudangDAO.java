@@ -8,11 +8,10 @@ import java.util.List;
 
 //CRUD GUDANG
 public class GudangDAO{
-
     // READ
     public List<Gudang> getAllGudang(){
         List<Gudang> list = new ArrayList<>();
-        String sql = "SELECT * FROM gudang";
+        String sql = "SELECT * FROM gudang WHERE status=1";
         try(Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)){
@@ -62,7 +61,7 @@ public class GudangDAO{
 
     // DELETE
     public boolean hapusGudang(int id){
-        String sql = "DELETE FROM gudang WHERE id_gudang=?";
+        String sql = "UPDATE gudang SET status=0 WHERE id_gudang=?";
         try(Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, id);

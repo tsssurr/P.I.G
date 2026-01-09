@@ -30,7 +30,7 @@ public class BarangController{
 
     private boolean isInputValid(){
         if(txtKode.getText().isEmpty() || txtNama.getText().isEmpty() || txtKategori.getText().isEmpty()){
-            showAlert("Validasi", "Semua kolom harus diisi!");
+            showAlert("Peringatan", "Semua kolom harus diisi!");
             return false;
         }
         return true;
@@ -91,7 +91,7 @@ public class BarangController{
     @FXML
     private void handleSave(){
         if(isInputValid()){
-            if(showConfirmation("Konfirmasi Simpan", "Apakah Anda yakin ingin menambahkan barang?")){
+            if(showConfirmation("Konfirmasi Simpan", "Simpan data barang baru?")){
                 boolean sukses = barangDAO.tambahBarang(txtKode.getText(), txtNama.getText(), txtKategori.getText());
                 if(sukses){
                     showAlert("Sukses", "Barang berhasil ditambahkan");
@@ -107,23 +107,23 @@ public class BarangController{
     @FXML
     private void handleUpdate(){
         if(selectedBarang != null && isInputValid()){
-            if(showConfirmation("Konfirmasi Perubahan", "Apakah Anda yakin ingin mengubah informasi barang?")){
+            if(showConfirmation("Konfirmasi Perubahan", "Ubah data barang?")){
                 boolean sukses = barangDAO.updateBarang(selectedBarang.getIdBarang(), txtKode.getText(), txtNama.getText(), txtKategori.getText());
                 if(sukses){
-                    showAlert("Sukses", "Informasi barang berhasil diubah");
+                    showAlert("Sukses", "Data baang berhasil diubah");
                     handleClear();
                     loadData();
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih barang pada tabel terlebih dahulu");
+            showAlert("Peringatan", "Pilih barang terlebih dahulu!");
         }
     }
 
     @FXML
     private void handleDelete(){
         if(selectedBarang != null){
-            if(showConfirmation("Konfirmasi Penghapusan", "Apakah Anda yakin ingin menghapus barang?")){
+            if(showConfirmation("Konfirmasi Hapus", "Hapus data barang?")){
                 boolean sukses = barangDAO.hapusBarang(selectedBarang.getIdBarang());
                 if(sukses){
                     showAlert("Sukses", "Barang berhasil dihapus");
@@ -132,7 +132,7 @@ public class BarangController{
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih barang pada tabel terlebih dahulu");
+            showAlert("Peringatan", "Pilih barang terlebih dahulu!");
         }
     }
 

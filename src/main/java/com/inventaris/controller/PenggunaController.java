@@ -41,6 +41,7 @@ public class PenggunaController{
     private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
     }
@@ -110,7 +111,7 @@ public class PenggunaController{
     @FXML
     private void handleSave(){
         if(isInputValid()){
-            if(showConfirmation("Konfirmasi Simpan", "Buat pengguna baru?")){
+            if(showConfirmation("Konfirmasi Simpan", "Simpan data pengguna?")){
                 int idGudang = 0;
                 if(comboGudang.getValue() != null){
                     idGudang = comboGudang.getValue().getIdGudang();
@@ -128,29 +129,29 @@ public class PenggunaController{
     @FXML
     private void handleUpdate(){
         if(selectedUser != null && isInputValid()){
-            if(showConfirmation("Konfirmasi Update", "Update data pengguna ini?")){
+            if(showConfirmation("Konfirmasi Perubahan", "Ubah data pengguna?")){
                 int idGudang = 0;
                 if(comboGudang.getValue() != null){
                     idGudang = comboGudang.getValue().getIdGudang();
                 }
 
                 if(penggunaDAO.updatePengguna(selectedUser.getIdPengguna(), txtUsername.getText(), txtPassword.getText(), comboRole.getValue(), idGudang)){
-                    showAlert("Sukses", "Pengguna berhasil diupdate");
+                    showAlert("Sukses", "Data pengguna berhasil diubah");
                     handleClear();
                     loadData();
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih user dulu!");
+            showAlert("Peringatan", "Pilih pengguna terlebih dahulu!");
         }
     }
 
     @FXML
     private void handleDelete(){
         if(selectedUser != null){
-            if(showConfirmation("Hapus User", "Yakin hapus user " + selectedUser.getUsername() + "?")){
+            if(showConfirmation("Komfirmasi Hapus", "Hapus data pengguna " + selectedUser.getUsername() + "?")){
                 if(penggunaDAO.hapusPengguna(selectedUser.getIdPengguna())){
-                    showAlert("Sukses", "User berhasil dihapus");
+                    showAlert("Sukses", "Pengguna berhasil dihapus");
                     handleClear();
                     loadData();
                 }

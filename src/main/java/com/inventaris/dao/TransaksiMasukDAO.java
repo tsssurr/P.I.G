@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransaksiMasukDAO{
-
     // READ
     public List<TransaksiMasuk> getAllTransaksi(){
         List<TransaksiMasuk> list = new ArrayList<>();

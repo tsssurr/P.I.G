@@ -12,6 +12,10 @@ public class Session{
     public static Pengguna getCurrentUser(){
         return currentUser;
     }
+
+    // public static Pengguna getUser(){
+    //     return currentUser;
+    // }
     
     public static void logout(){
         currentUser = null;

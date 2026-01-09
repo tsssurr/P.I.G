@@ -88,7 +88,7 @@ public class SupplierController{
     @FXML
     private void handleSave(){
         if(isInputValid()){
-            if(showConfirmation("Konfirmasi Simpan", "Apakah Anda yakin menambahkan supplier baru?")){
+            if(showConfirmation("Konfirmasi Simpan", "Simpan data supplier baru?")){
                 if(supplierDAO.tambahSupplier(txtNama.getText(), txtAlamat.getText(), txtKontak.getText())){
                     showAlert("Sukses", "Supplier berhasil disimpan");
                     handleClear();
@@ -101,7 +101,7 @@ public class SupplierController{
     @FXML
     private void handleUpdate(){
         if(selectedSupplier != null && isInputValid()){
-            if(showConfirmation("Konfirmasi Update", "Apakah Anda yakin mengubah data supplier ini?")){
+            if(showConfirmation("Konfirmasi Perubahan", "Ubah data supplier?")){
                 if(supplierDAO.updateSupplier(selectedSupplier.getIdSupplier(), txtNama.getText(), txtAlamat.getText(), txtKontak.getText())){
                     showAlert("Sukses", "Data supplier berhasil diubah");
                     handleClear();
@@ -109,7 +109,7 @@ public class SupplierController{
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih supplier pada tabel terlebih dahulu");
+            showAlert("Peringatan", "Pilih supplier terlebih dahulu");
         }
     }
 
@@ -117,7 +117,7 @@ public class SupplierController{
     private void handleDelete(){
         if(selectedSupplier != null){
             String nama = selectedSupplier.getNamaSupplier();
-            if(showConfirmation("Konfirmasi Hapus", "Apakah anda yakin menghapus supplier \"" + nama + "\"?")){
+            if(showConfirmation("Konfirmasi Hapus", "Hapus data supplier \"" + nama + "\"?")){
                 if(supplierDAO.hapusSupplier(selectedSupplier.getIdSupplier())){
                     showAlert("Sukses", "Supplier berhasil dihapus");
                     handleClear();
@@ -125,7 +125,7 @@ public class SupplierController{
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih supplier pada tabel terlebih dahulu");
+            showAlert("Peringatan", "Pilih supplier pada  terlebih dahulu");
         }
     }
 

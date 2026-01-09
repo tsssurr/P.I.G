@@ -3,10 +3,12 @@ package com.inventaris.controller;
 import com.inventaris.App;
 import com.inventaris.dao.*;
 import com.inventaris.model.*;
+import com.inventaris.util.Session;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -47,9 +49,10 @@ public class TransaksiMasukController {
         return true;
     }
     
-    private void showAlert(String title, String content) {
+    private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
     }
@@ -72,6 +75,7 @@ public class TransaksiMasukController {
     private BarangDAO barangDAO = new BarangDAO();
     private SupplierDAO supplierDAO = new SupplierDAO();
     private GudangDAO gudangDAO = new GudangDAO();
+    private StokDAO stokDAO = new StokDAO();
 
     @FXML
     public void initialize() {
@@ -85,8 +89,7 @@ public class TransaksiMasukController {
 
         comboBarang.setItems(FXCollections.observableArrayList(barangDAO.getAllBarang()));
         comboSupplier.setItems(FXCollections.observableArrayList(supplierDAO.getAllSupplier()));
-        comboGudang.setItems(FXCollections.observableArrayList(gudangDAO.getAllGudang()));
-
+        aturPilihanGudang();
         dateTanggal.setValue(LocalDate.now());
 
         loadData();
@@ -111,6 +114,10 @@ public class TransaksiMasukController {
                 );
 
                 if (sukses) {
+                    stokDAO.tambahStok(comboBarang.getValue().getIdBarang(), 
+                    comboGudang.getValue().getIdGudang(), 
+                    Integer.parseInt(txtJumlah.getText()));
+
                     showAlert("Sukses", "Transaksi berhasil disimpan!");
                     clearForm();
                     loadData();
@@ -137,4 +144,25 @@ public class TransaksiMasukController {
         stage.setScene(new Scene(root));
     }
 
+    private void aturPilihanGudang() {
+        Pengguna user = Session.getCurrentUser();
+        
+        ObservableList<Gudang> semuaGudang = FXCollections.observableArrayList(gudangDAO.getAllGudang());
+
+        if (user.getIdGudang() == 0) {
+            comboGudang.setItems(semuaGudang);
+            comboGudang.setDisable(false); 
+        } else {
+            for (Gudang g : semuaGudang) {
+                if (g.getIdGudang() == user.getIdGudang()) {
+                    comboGudang.setItems(FXCollections.observableArrayList(g));
+                    
+                    comboGudang.setValue(g);
+                    
+                    comboGudang.setDisable(true); 
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -3,9 +3,14 @@ package com.inventaris.controller;
 import com.inventaris.App;
 import com.inventaris.dao.*;
 import com.inventaris.model.*;
+import com.inventaris.util.Session;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -29,6 +34,21 @@ public class ReturController {
     @FXML private TextField txtJumlah;
     @FXML private TextArea txtKeterangan;
     
+    private boolean isInputValid() {
+        if (comboBarang.getValue() == null || comboGudang.getValue() == null || 
+            comboSupplier.getValue() == null || txtJumlah.getText().isEmpty()) {
+            showAlert("Peringatan", "Semua kolom (kecuali keterangan) wajib diisi!");
+            return false;
+        }
+        try {
+            Integer.parseInt(txtJumlah.getText());
+        } catch (NumberFormatException e) {
+            showAlert("Peringatan", "Jumlah harus berupa angka!");
+            return false;
+        }
+        return true;
+    }
+
     private void showAlert(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -36,11 +56,26 @@ public class ReturController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+     private boolean showConfirmation(String title, String content){
+        ButtonType yesButton = new ButtonType("Ya"); 
+        ButtonType noButton = new ButtonType("Tidak");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, null, yesButton, noButton);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        return result.isPresent() && result.get() == yesButton;
+    }
     
     private ReturDAO returDAO = new ReturDAO();
     private BarangDAO barangDAO = new BarangDAO();
     private GudangDAO gudangDAO = new GudangDAO();
     private SupplierDAO supplierDAO = new SupplierDAO();
+    private StokDAO stokDAO = new StokDAO();
     
     @FXML
     public void initialize() {
@@ -52,12 +87,42 @@ public class ReturController {
         colKeterangan.setCellValueFactory(new PropertyValueFactory<>("keterangan"));
 
         comboBarang.setItems(FXCollections.observableArrayList(barangDAO.getAllBarang()));
-        comboGudang.setItems(FXCollections.observableArrayList(gudangDAO.getAllGudang()));
-        comboSupplier.setItems(FXCollections.observableArrayList(supplierDAO.getAllSupplier()));
+        aturPilihanGudang();
+        comboSupplier.setDisable(true);
+
+        comboBarang.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            loadFilteredSupplier();
+        });
+        comboGudang.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            loadFilteredSupplier();
+        });
 
         dateTanggal.setValue(LocalDate.now());
 
         loadData();
+    }
+
+    private void loadFilteredSupplier(){
+        if (comboBarang.getValue() != null && comboGudang.getValue() != null) {
+            
+            int idBarang = comboBarang.getValue().getIdBarang();
+            int idGudang = comboGudang.getValue().getIdGudang();
+
+            List<Supplier> validSuppliers = supplierDAO.getSupplierByRiwayat(idBarang, idGudang);
+
+            comboSupplier.setItems(FXCollections.observableArrayList(validSuppliers));
+            
+            if (validSuppliers.isEmpty()) {
+                comboSupplier.setDisable(true);
+                comboSupplier.setPromptText("Tidak ada supplier untuk barang ini di gudang ini");
+            } else {
+                comboSupplier.setDisable(false);
+                comboSupplier.setPromptText("-- Pilih Supplier --");
+            }
+        } else {
+            comboSupplier.getItems().clear();
+            comboSupplier.setDisable(true);
+        }
     }
 
     private void loadData() {
@@ -66,31 +131,44 @@ public class ReturController {
 
     @FXML
     private void handleSave() {
-        if (comboBarang.getValue() == null || comboGudang.getValue() == null || 
-            comboSupplier.getValue() == null || txtJumlah.getText().isEmpty()) {
-            showAlert("Validasi", "Barang, Gudang, Supplier, dan Jumlah wajib diisi!");
-            return;
-        }
+        if (isInputValid()) {
+            if(showConfirmation("Konfirmasi", "Simpan transaksi retur?")){           
+                try {
+                    int jumlahKeluar = Integer.parseInt(txtJumlah.getText());
+                    int idBarang =  comboBarang.getValue().getIdBarang();
+                    int idGudang = comboGudang.getValue().getIdGudang();
 
-        try {
-            boolean sukses = returDAO.simpanRetur(
-                dateTanggal.getValue(),
-                comboBarang.getValue().getIdBarang(),
-                comboGudang.getValue().getIdGudang(),
-                comboSupplier.getValue().getIdSupplier(),
-                Integer.parseInt(txtJumlah.getText()),
-                txtKeterangan.getText()
-            );
+                    int stokTersedia = stokDAO.getStok(idBarang, idGudang);
 
-            if (sukses) {
-                showAlert("Sukses", "Data Retur berhasil disimpan!");
-                clearForm();
-                loadData();
-            }else {
-                showAlert("Gagal", "Terjadi kesalahan saat menyimpan data.");
+                    if(stokTersedia < jumlahKeluar){
+                        showAlert("Peringatan", "Stok tidak cukup!");
+                        return;
+                    }
+
+                    boolean sukses = returDAO.simpanRetur(
+                        dateTanggal.getValue(),
+                        comboBarang.getValue().getIdBarang(),
+                        comboGudang.getValue().getIdGudang(),
+                        comboSupplier.getValue().getIdSupplier(),
+                        jumlahKeluar,
+                        txtKeterangan.getText()
+                    );
+
+                    if (sukses) {
+                        stokDAO.kurangiStok(idBarang, idGudang, jumlahKeluar);
+                        showAlert("Sukses", "Data Retur berhasil disimpan!");
+                        clearForm();
+                        loadData();
+                    }else {
+                        showAlert("Gagal", "Terjadi kesalahan saat menyimpan data.");
+                    }
+                }catch (NumberFormatException e) {
+                    showAlert("Peringatan", "Jumlah harus berupa angka!");
+                }
+            }else{
+                showAlert("Peringatan", "Barang, Gudang, Supplier, dan Jumlah wajib diisi!");
+                return;
             }
-        }catch (NumberFormatException e) {
-            showAlert("Error", "Jumlah harus berupa angka!");
         }
     }
 
@@ -110,4 +188,25 @@ public class ReturController {
         stage.setScene(new Scene(root));
     }
 
+    private void aturPilihanGudang() {
+        Pengguna user = Session.getCurrentUser();
+        
+        ObservableList<Gudang> semuaGudang = FXCollections.observableArrayList(gudangDAO.getAllGudang());
+
+        if (user.getIdGudang() == 0) {
+            comboGudang.setItems(semuaGudang);
+            comboGudang.setDisable(false); 
+        } else {
+            for (Gudang g : semuaGudang) {
+                if (g.getIdGudang() == user.getIdGudang()) {
+                    comboGudang.setItems(FXCollections.observableArrayList(g));
+                    
+                    comboGudang.setValue(g);
+                    
+                    comboGudang.setDisable(true); 
+                    break;
+                }
+            }
+        }
+    }
 }

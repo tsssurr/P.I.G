@@ -9,7 +9,6 @@ import java.util.List;
 
 // CRUD Penjualan
 public class PenjualanDAO{
-
     // READ
     public List<Penjualan> getAllPenjualan(){
         List<Penjualan> list = new ArrayList<>();

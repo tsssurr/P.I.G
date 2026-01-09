@@ -27,7 +27,7 @@ public class BarangDAO{
     // READ 
     public List<Barang> getAllBarang(){
         List<Barang> list = new ArrayList<>();
-        String sql = "SELECT * FROM barang";
+        String sql = "SELECT * FROM barang WHERE status = 1";
         
         try(Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -65,8 +65,11 @@ public class BarangDAO{
     }
 
     // DELETE 
+    // delete di sini tidak benar benar menghapus data barang dari database
+    // namun hanya menggubah (UPDATE) status barang tersebut menjadi tidak aktif
+    // barang yang statusnya tidak aktif tidak akan ditampilkan di aplikasi
     public boolean hapusBarang(int id){
-        String sql = "DELETE FROM barang WHERE id_barang=?";
+        String sql = "UPDATE barang SET status = 0 WHERE id_barang=?";
         try(Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, id);

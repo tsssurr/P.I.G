@@ -9,7 +9,6 @@ import java.util.List;
 
 // CRUD Retur
 public class ReturDAO{
-
     // READ
     public List<Retur> getAllRetur(){
         List<Retur> list = new ArrayList<>();

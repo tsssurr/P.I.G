@@ -8,7 +8,6 @@ import java.util.List;
 
 // CRUD Pembeli
 public class PembeliDAO{
-    
     // READ
     public List<Pembeli> getAllPembeli(){
         List<Pembeli> list = new ArrayList<>();

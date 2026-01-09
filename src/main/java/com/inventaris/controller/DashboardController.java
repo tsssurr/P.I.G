@@ -95,12 +95,6 @@ public class DashboardController{
         }
     }
 
-    // @FXML
-    // private void menuPembeli(){
-    //     System.out.println("Buka Menu Manajemen Pengguna");
-    //     //TODO: buat mvc pembeli cok, transaksi keluar kan ada beli sama retur
-    // }
-
     @FXML
     private void menuBarangMasuk(){
         System.out.println("Buka Transaksi Masuk(Pengadaan)");
@@ -112,11 +106,6 @@ public class DashboardController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void menuBarangKeluar(){
-        System.out.println("Buka Transaksi Keluar(Retur/Jual)");
     }
 
     @FXML

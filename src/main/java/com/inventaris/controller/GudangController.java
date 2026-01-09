@@ -25,8 +25,8 @@ public class GudangController{
     @FXML private TextArea txtLokasi;
 
     private boolean isInputValid(){
-        if(txtNama.getText().isEmpty()){
-            showAlert("Validasi", "Nama Gudang wajib diisi!");
+        if(txtNama.getText().isEmpty() || txtLokasi.getText().isEmpty()){
+            showAlert("Peringatan", "Semua kolom wajib diisi!");
             return false;
         }
         return true;
@@ -86,7 +86,7 @@ public class GudangController{
         if(isInputValid()){
             if(showConfirmation("Konfirmasi Simpan", "Simpan data gudang baru?")){
                 if(gudangDAO.tambahGudang(txtNama.getText(), txtLokasi.getText())){
-                    showAlert("Sukses", "Gudang berhasil disimpan");
+                    showAlert("Sukses", "Gudang berhasil ditambahkan");
                     handleClear();
                     loadData();
                 }
@@ -97,23 +97,22 @@ public class GudangController{
     @FXML
     private void handleUpdate(){
         if(selectedGudang != null && isInputValid()){
-            if(showConfirmation("Konfirmasi Update", "Ubah data gudang ini?")){
+            if(showConfirmation("Konfirmasi Perubahan", "Ubah data gudang?")){
                 if(gudangDAO.updateGudang(selectedGudang.getIdGudang(), txtNama.getText(), txtLokasi.getText())){
-                    showAlert("Sukses", "Gudang berhasil diupdate");
+                    showAlert("Sukses", "data gudang berhasil diubah");
                     handleClear();
                     loadData();
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih gudang dulu!");
+            showAlert("Peringatan", "Pilih gudang terlebih dahulu!");
         }
     }
 
     @FXML
     private void handleDelete(){
         if(selectedGudang != null){
-            String nama = selectedGudang.getNamaGudang();
-            if(showConfirmation("Konfirmasi Hapus", "Yakin hapus gudang \"" + nama + "\"?\nPERHATIAN: Data stok di gudang ini mungkin akan hilang.")){
+            if(showConfirmation("Konfirmasi Hapus", "Hapus data gudang")){
                 if(gudangDAO.hapusGudang(selectedGudang.getIdGudang())){
                     showAlert("Sukses", "Gudang berhasil dihapus");
                     handleClear();
@@ -121,7 +120,7 @@ public class GudangController{
                 }
             }
         }else{
-            showAlert("Peringatan", "Pilih gudang dulu!");
+            showAlert("Peringatan", "Pilih gudang terlebih dahulu!");
         }
     }
 
